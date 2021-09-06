@@ -48,7 +48,6 @@ def lights(light):
 # a function for automatic mode
 def auto():
     while mode == 'auto':
-        print("running auto loop")
         lights('red')
         sleep(15)
         lights('green')
@@ -71,17 +70,12 @@ def control():
     if (request.json.get('mode') == 'auto'):
         print("received a request for auto")
         mode = 'auto'
-        # start the thread
-        # print('got auto request!')
+        # start the thread to control the LEDs in automatic mode without holding up the flask loop
         thread.start()
         
     # manual mode
     elif (request.json.get('mode') == 'manual'):
-        print("received a request for manual")
         mode = 'manual'
-        # rejoin the thread
-        print('rejoining thread')
-        # thread.join()
         if (request.json.get('color')):
             lights(request.json.get('color'))
     return request.json.get('mode')
