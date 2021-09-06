@@ -49,6 +49,8 @@ def lights(light):
 # a function for automatic mode
 def auto():
     print('starting thread!')
+    print('mode is:')
+    print(mode)
     while mode == 'auto':
         print("running auto loop")
         lights('red')
