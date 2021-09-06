@@ -48,6 +48,7 @@ def lights(light):
 
 # a function for automatic mode
 def auto():
+    print('starting thread!')
     while mode == 'auto':
         print("running auto loop")
         lights('red')
@@ -70,6 +71,7 @@ def control():
     if (request.json.get('mode') == 'auto'):
         
         # start the thread
+        print('got auto request!')
         thread.start()
         
     # manual mode
