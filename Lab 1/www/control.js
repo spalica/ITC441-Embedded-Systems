@@ -1,5 +1,7 @@
 console.log('working!')
 
-document.getElementById('red').addEventListener(click, function() {
-    console.log('clicked!')
+
+
+document.getElementById('yellow').addEventListener(onclick, function() {
+    console.log('Yellow!')
 });
