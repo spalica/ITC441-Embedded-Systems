@@ -1,4 +1,20 @@
 <title>Traffic Light</title>
+
+<head>
+    <style>
+        #circle {
+            width: 50px;
+            height: 50px;
+            -webkit-border-radius: 25px;
+            -moz-border-radius: 25px;
+            border-radius: 25px;
+            background: blue;
+        }
+    </style>
+</head>
+
+
+
 <h1>Traffic Light</h1>
 <script src='./control.js'></script>
 
@@ -6,12 +22,5 @@
 
 
 <body>
-    <script>   
-        var canvas = document.getElementById("circlecanvas");
-        var context = canvas.getContext("2d");
-        context.arc(50, 50, 50, 0, Math.PI * 2, false);
-        context.fillStyle = "red";
-        context.fill()
-    </script>
-    <canvas id="circlecanvas" width="100" height="100"></canvas>
+    <div id="circle"></div>
 </body>
