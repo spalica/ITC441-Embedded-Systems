@@ -52,16 +52,31 @@ document.getElementById("green").addEventListener("click", function () {
 });
 
 
-document.getElementById("mode").addEventListener("click", function(){
-    console.log("click on toggle switch")
-    if (mode == "auto"){
-        console.log("sending auto")
-        mode = "manual"
-        sendRequestMode()
-    }
-    else if (mode == "manual"){
-        console.log("sending manual")
-        mode = "auto"
-        sendRequestMode()
-    }
+document.getElementById("auto").addEventListener("click", function () {
+    console.log("sending auto")
+    mode = "auto"
+    sendRequestMode()
 });
+
+document.getElementById("manual").addEventListener("click", function () {
+    console.log("sending manual")
+    mode = "manual"
+    sendRequestMode()
+});
+
+
+
+
+// document.getElementById("mode").addEventListener("click", function(){
+//     console.log("click on toggle switch")
+//     if (mode == "auto"){
+//         console.log("sending auto")
+//         mode = "manual"
+//         sendRequestMode()
+//     }
+//     else if (mode == "manual"){
+//         console.log("sending manual")
+//         mode = "auto"
+//         sendRequestMode()
+//     }
+// });

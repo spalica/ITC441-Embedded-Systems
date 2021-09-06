@@ -68,7 +68,7 @@ def home(path):
 @app.route('/control/', methods=['POST'])
 def control():
     global mode
-    
+    thread = Thread(target = auto, args = ())
 
     # automatic mode
     if (request.json.get('mode') == 'auto'):
@@ -76,7 +76,6 @@ def control():
         mode = 'auto'
         # start the thread
         # print('got auto request!')
-        thread = Thread(target = auto, args = ())
         thread.start()
         
     # manual mode
