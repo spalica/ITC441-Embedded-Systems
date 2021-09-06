@@ -42,12 +42,12 @@ def lights(light):
 
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        return do_the_login()
-    else:
-        return show_the_login_form()
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+#         return do_the_login()
+#     else:
+#         return show_the_login_form()
 
 # add route to serve webpage and javascript
 @app.route('/<path:path>', methods=['GET'])
