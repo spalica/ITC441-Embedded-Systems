@@ -68,7 +68,6 @@ def control():
 
     # automatic mode
     if (request.json.get('mode') == 'auto'):
-        print("received a request for auto")
         mode = 'auto'
         # start the thread to control the LEDs in automatic mode without holding up the flask loop
         thread.start()
