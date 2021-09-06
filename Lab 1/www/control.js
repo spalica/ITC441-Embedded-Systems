@@ -2,6 +2,7 @@ var url = "control/"
 var mode = "manual"
 
 function sendRequest(color){
+    console.log("sending with color")
     console.log(color);
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
@@ -11,6 +12,7 @@ function sendRequest(color){
 
 
 function sendRequest(){
+    console.log("sending without color")
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
