@@ -1,8 +1,14 @@
+# allow threading for automatic mode
+from threading import Thread
+
 # set up flask
 
 from flask import Flask
 from flask import request
 from flask import send_from_directory
+
+from time import sleep
+
 app = Flask(__name__)
 
 # set things up for GPIO
@@ -18,8 +24,8 @@ GPIO.setup(23, GPIO.OUT)
 GPIO.setup(24, GPIO.OUT)
 GPIO.setup(25, GPIO.OUT)
 
-
-
+# set things up for control
+mode = 'manual'
 
 def lights(light):
     light = str(light)
@@ -40,14 +46,17 @@ def lights(light):
         GPIO.output(YELLOW, False)
         GPIO.output(RED, False)
 
+# a function for automatic mode
+def auto():
+    while mode == 'auto':
+        print("running auto loop")
+        lights('red')
+        sleep(1)
+        lights('green')
+        sleep(1)
+        lights('yellow')
+        sleep(.5)
 
-
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     if request.method == 'POST':
-#         return do_the_login()
-#     else:
-#         return show_the_login_form()
 
 # add route to serve webpage and javascript
 @app.route('/<path:path>', methods=['GET'])
@@ -56,19 +65,19 @@ def home(path):
 
 @app.route('/control/', methods=['POST'])
 def control():
-    print('************************************')
-
+    thread = Thread(target = auto, args = ())
     # automatic mode
     if (request.json.get('mode') == 'auto'):
-        pass
-
+        
+        # start the thread
+        thread.start()
+        
     # manual mode
     if (request.json.get('mode') == 'manual'):
+        # rejoin the thread
+        thread.join()
         if (request.json.get('color')):
             lights(request.json.get('color'))
-
-
-    print('************************************')
 
     return request.json.get('mode')
     # return request.json['hi']
