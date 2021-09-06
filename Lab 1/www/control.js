@@ -1,12 +1,12 @@
-
+var url = "10.37.34.3/control/"
 
 document.getElementById("red").addEventListener("click", function () {
     console.log('red');
 
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-    xhr.send({"mode": "manual", "color": "red"});
+    xhr.send(JSON.stringify({"mode": "manual", "color": "red"}));
 
 
 
