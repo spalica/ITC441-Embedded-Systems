@@ -7,7 +7,7 @@ function sendRequest(color){
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-    xhr.send(JSON.stringify({"mode": "manual", "color": color}));
+    xhr.send(JSON.stringify({"mode": mode, "color": color}));
 }
 
 
