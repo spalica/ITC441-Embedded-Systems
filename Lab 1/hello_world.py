@@ -69,14 +69,16 @@ def control():
     thread = Thread(target = auto, args = ())
     # automatic mode
     if (request.json.get('mode') == 'auto'):
-        
+        mode = 'auto'
         # start the thread
         print('got auto request!')
         thread.start()
         
     # manual mode
     if (request.json.get('mode') == 'manual'):
+        mode = 'manual'
         # rejoin the thread
+        print('rejoining thread')
         thread.join()
         if (request.json.get('color')):
             lights(request.json.get('color'))
