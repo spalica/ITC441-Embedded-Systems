@@ -25,6 +25,7 @@ GPIO.setup(24, GPIO.OUT)
 GPIO.setup(25, GPIO.OUT)
 
 # set things up for control
+global mode
 mode = 'manual'
 
 def lights(light):
