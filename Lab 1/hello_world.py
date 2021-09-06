@@ -25,7 +25,7 @@ GPIO.setup(24, GPIO.OUT)
 GPIO.setup(25, GPIO.OUT)
 
 # set things up for control
-mode = 'manual'
+# mode = 'manual'
 
 def lights(light):
     light = str(light)
@@ -77,7 +77,7 @@ def control():
         thread.start()
         
     # manual mode
-    if (request.json.get('mode') == 'manual'):
+    elif (request.json.get('mode') == 'manual'):
         mode = 'manual'
         # rejoin the thread
         print('rejoining thread')
