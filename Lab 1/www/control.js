@@ -14,7 +14,7 @@ function sendRequest(color){
 
 
 function sendRequestMode(){
-    console.log("sending without color")
+    console.log(mode)
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
@@ -56,11 +56,11 @@ document.getElementById("mode").addEventListener("click", function(){
     if (mode == "auto"){
         console.log("sending auto")
         mode = "manual"
-        sendRequestMode(mode)
+        sendRequestMode()
     }
     else if (mode == "manual"){
         console.log("senging manual")
         mode = "auto"
-        sendRequestMode(mode)
+        sendRequestMode()
     }
 });
