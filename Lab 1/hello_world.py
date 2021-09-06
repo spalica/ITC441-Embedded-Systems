@@ -49,9 +49,6 @@ def lights(light):
 
 # a function for automatic mode
 def auto():
-    print('starting thread!')
-    print('mode is:')
-    print(mode)
     while mode == 'auto':
         print("running auto loop")
         lights('red')
@@ -72,9 +69,10 @@ def home(path):
 def control():
     global mode
     thread = Thread(target = auto, args = ())
+
     # automatic mode
     if (request.json.get('mode') == 'auto'):
-        
+        print("received a request for auto")
         mode = 'auto'
         # start the thread
         print('got auto request!')
@@ -82,6 +80,7 @@ def control():
         
     # manual mode
     elif (request.json.get('mode') == 'manual'):
+        print("received a request for manual")
         mode = 'manual'
         # rejoin the thread
         print('rejoining thread')
