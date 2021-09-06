@@ -22,71 +22,73 @@ GPIO.setup(23, GPIO.OUT)
 GPIO.setup(24, GPIO.OUT)
 GPIO.setup(25, GPIO.OUT)
 
-# set things up for control
+# set things up for control of mode on the server side
 global mode
 mode = 'manual'
 
-try:
-    def lights(light):
-        light = str(light)
-        if light == 'green':
-            GPIO.output(GREEN, True)
-            GPIO.output(YELLOW, False)
-            GPIO.output(RED, False)
-        if light == 'yellow':
-            GPIO.output(GREEN, False)
-            GPIO.output(YELLOW, True)
-            GPIO.output(RED, False)
-        if light == 'red':
-            GPIO.output(GREEN, False)
-            GPIO.output(YELLOW, False)
-            GPIO.output(RED, True)
-        if light == 'off':
-            GPIO.output(GREEN, False)
-            GPIO.output(YELLOW, False)
-            GPIO.output(RED, False)
+def lights(light):
+    light = str(light)
+    if light == 'green':
+        GPIO.output(GREEN, True)
+        GPIO.output(YELLOW, False)
+        GPIO.output(RED, False)
+    if light == 'yellow':
+        GPIO.output(GREEN, False)
+        GPIO.output(YELLOW, True)
+        GPIO.output(RED, False)
+    if light == 'red':
+        GPIO.output(GREEN, False)
+        GPIO.output(YELLOW, False)
+        GPIO.output(RED, True)
+    if light == 'off':
+        GPIO.output(GREEN, False)
+        GPIO.output(YELLOW, False)
+        GPIO.output(RED, False)
 
-    # a function for automatic mode
-    def auto():
-        while mode == 'auto':
-            lights('red')
-            sleep(15)
-            lights('green')
-            sleep(15)
-            lights('yellow')
-            sleep(3)
+# a function for automatic mode
+def auto():
+    while mode == 'auto':
+        print("running auto loop")
+        lights('red')
+        sleep(15)
+        lights('green')
+        sleep(15)
+        lights('yellow')
+        sleep(3)
 
-    # add route to serve webpage and javascript
-    @app.route('/<path:path>', methods=['GET'])
-    def home(path):
-        return send_from_directory('www', path)
+# add route to serve webpage and javascript
+@app.route('/<path:path>', methods=['GET'])
+def home(path):
+    return send_from_directory('www', path)
 
-    # add route to listen for control data from the webpage
-    @app.route('/control/', methods=['POST'])
-    def control():
-        global mode
-        thread = Thread(target = auto, args = ())
+# add route to listen for control data from the webpage
+@app.route('/control/', methods=['POST'])
+def control():
+    global mode
+    thread = Thread(target = auto, args = ())
 
-        # automatic mode
-        if (request.json.get('mode') == 'auto'):
-            mode = 'auto'
-            # start the thread
-            # print('got auto request!')
-            thread.start()
-            
-        # manual mode
-        elif (request.json.get('mode') == 'manual'):
-            mode = 'manual'
-            if (request.json.get('color')):
-                lights(request.json.get('color'))
-        return request.json.get('mode')
+    # automatic mode
+    if (request.json.get('mode') == 'auto'):
+        print("received a request for auto")
+        mode = 'auto'
+        # start the thread
+        # print('got auto request!')
+        thread.start()
+        
+    # manual mode
+    elif (request.json.get('mode') == 'manual'):
+        print("received a request for manual")
+        mode = 'manual'
+        # rejoin the thread
+        print('rejoining thread')
+        # thread.join()
+        if (request.json.get('color')):
+            lights(request.json.get('color'))
+    return request.json.get('mode')
 
-    @app.route('/js/<path:path>')
-    def send_js(path):
-        return send_from_directory('js', path)
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('js', path)
 
-    if __name__ == "__main__":
-        app.run(host='0.0.0.0')
-
-except KeyboardInterrupt:
-    GPIO.cleanup()
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
