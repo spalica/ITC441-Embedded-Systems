@@ -84,7 +84,7 @@ def control():
         mode = 'manual'
         # rejoin the thread
         print('rejoining thread')
-        thread.join()
+        # thread.join()
         if (request.json.get('color')):
             lights(request.json.get('color'))
 
