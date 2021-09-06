@@ -1,5 +1,7 @@
 var url = "control/"
 var mode = "manual"
+sendRequestMode(mode)
+console.log("done initializing")
 
 function sendRequest(color){
     console.log("sending with color")
