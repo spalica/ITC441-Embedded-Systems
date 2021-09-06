@@ -11,13 +11,13 @@ function sendRequest(color){
 }
 
 
-function sendRequest(){
-    console.log("sending without color")
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-    xhr.send(JSON.stringify({"mode": mode}));
-}
+// function sendRequest(){
+//     console.log("sending without color")
+//     let xhr = new XMLHttpRequest();
+//     xhr.open("POST", url, true);
+//     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+//     xhr.send(JSON.stringify({"mode": mode}));
+// }
 
 
 
@@ -57,6 +57,6 @@ document.getElementById("mode").addEventListener("click", function(){
     }
     else if (mode == "manual"){
         mode = "auto"
-        sendRequest()
+        sendRequest("NOCOLOR")
     }
 });
