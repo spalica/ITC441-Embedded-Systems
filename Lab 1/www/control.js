@@ -50,7 +50,7 @@ document.getElementById("green").addEventListener("click", function () {
 
 document.getElementById("mode").addEventListener("click", function(){
     if (mode == "auto"){
-        mode = manual
+        mode = "manual"
         sendRequest()
     }
     else if (mode == "manual"){
