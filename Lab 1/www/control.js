@@ -19,5 +19,5 @@ document.getElementById("green").addEventListener("click", function () {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-    xhr.send(JSON.stringify({"mode": "manual", "color": "green"}));
+    xhr.send({"mode": "manual", "color": "green"});
 });
