@@ -53,10 +53,10 @@ document.getElementById("green").addEventListener("click", function () {
 document.getElementById("mode").addEventListener("click", function(){
     if (mode == "auto"){
         mode = "manual"
-        sendRequest()
+        sendRequest("MODE_ONLY")
     }
     else if (mode == "manual"){
         mode = "auto"
-        sendRequest("NOCOLOR")
+        sendRequest("MODE_ONLY")
     }
 });
