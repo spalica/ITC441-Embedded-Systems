@@ -9,6 +9,17 @@ function sendRequest(color){
     xhr.send(JSON.stringify({"mode": "manual", "color": color}));
 }
 
+
+function sendRequest(){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    xhr.send(JSON.stringify({"mode": mode}));
+}
+
+
+
+
 document.getElementById("red").addEventListener("click", function () {
     if (mode == "manual"){
         sendRequest("red")
@@ -33,5 +44,17 @@ document.getElementById("green").addEventListener("click", function () {
     }
     else{
         alert("cannot set color manually while not in manual mode.")
+    }
+});
+
+
+document.getElementById("mode").addEventListener("click", function(){
+    if (mode == "auto"){
+        mode = manual
+        sendRequest()
+    }
+    else if (mode == "manual"){
+        mode = "auto"
+        sendRequest()
     }
 });
