@@ -67,6 +67,7 @@ def auto():
 def home(path):
     return send_from_directory('www', path)
 
+# add route to listen for control data from the webpage
 @app.route('/control/', methods=['POST'])
 def control():
     global mode
@@ -89,7 +90,6 @@ def control():
             lights(request.json.get('color'))
 
     return request.json.get('mode')
-    # return request.json['hi']
 
 
 @app.route('/js/<path:path>')
