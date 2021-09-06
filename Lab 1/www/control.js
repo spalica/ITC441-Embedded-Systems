@@ -1,4 +1,4 @@
-var url = "10.37.34.3/control/"
+var url = "control/"
 
 document.getElementById("red").addEventListener("click", function () {
     console.log('red');
