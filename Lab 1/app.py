@@ -2,11 +2,9 @@
 from threading import Thread
 
 # set up flask
-
 from flask import Flask
 from flask import request
 from flask import send_from_directory
-
 from time import sleep
 
 app = Flask(__name__)
@@ -29,9 +27,6 @@ global mode
 mode = 'manual'
 
 try:
-
-    
-
     def lights(light):
         light = str(light)
         if light == 'green':
@@ -54,14 +49,12 @@ try:
     # a function for automatic mode
     def auto():
         while mode == 'auto':
-            print("running auto loop")
             lights('red')
             sleep(15)
             lights('green')
             sleep(15)
             lights('yellow')
             sleep(3)
-
 
     # add route to serve webpage and javascript
     @app.route('/<path:path>', methods=['GET'])
@@ -76,7 +69,6 @@ try:
 
         # automatic mode
         if (request.json.get('mode') == 'auto'):
-            print("received a request for auto")
             mode = 'auto'
             # start the thread
             # print('got auto request!')
@@ -84,16 +76,10 @@ try:
             
         # manual mode
         elif (request.json.get('mode') == 'manual'):
-            print("received a request for manual")
             mode = 'manual'
-            # rejoin the thread
-            print('rejoining thread')
-            # thread.join()
             if (request.json.get('color')):
                 lights(request.json.get('color'))
-
         return request.json.get('mode')
-
 
     @app.route('/js/<path:path>')
     def send_js(path):
@@ -101,6 +87,6 @@ try:
 
     if __name__ == "__main__":
         app.run(host='0.0.0.0')
-        
+
 except KeyboardInterrupt:
     GPIO.cleanup()
