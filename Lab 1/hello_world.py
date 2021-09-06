@@ -75,7 +75,7 @@ def control():
         print("received a request for auto")
         mode = 'auto'
         # start the thread
-        print('got auto request!')
+        # print('got auto request!')
         thread.start()
         
     # manual mode
