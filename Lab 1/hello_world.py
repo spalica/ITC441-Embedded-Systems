@@ -56,6 +56,7 @@ def home(path):
 
 @app.route('/control/', methods=['POST'])
 def control():
+    print('************************************')
 
     # automatic mode
     if (request.json.get('mode') == 'auto'):
@@ -67,10 +68,8 @@ def control():
             lights(request.json.get('color'))
 
 
-    # print('************************************')
-    # print(request)
-    # print(request.json)
-    # print(request.json.get('hi'))
+    print('************************************')
+
     return request.json.get('mode')
     # return request.json['hi']
 
