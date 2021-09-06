@@ -52,10 +52,12 @@ document.getElementById("green").addEventListener("click", function () {
 
 document.getElementById("mode").addEventListener("click", function(){
     if (mode == "auto"){
+        console.log("sending auto")
         mode = "manual"
         sendRequestMode(mode)
     }
     else if (mode == "manual"){
+        console.log("senging manual")
         mode = "auto"
         sendRequestMode(mode)
     }
