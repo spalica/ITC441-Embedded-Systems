@@ -18,16 +18,16 @@ RED = 23
 YELLOW = 24
 GREEN = 25
 
-GPIO.setup(23, GPIO.OUT)
-GPIO.setup(24, GPIO.OUT)
-GPIO.setup(25, GPIO.OUT)
+GPIO.setup(RED, GPIO.OUT)
+GPIO.setup(YELLOW, GPIO.OUT)
+GPIO.setup(GREEN, GPIO.OUT)
 
-# set things up for control of mode on the server side
+# set things up for control of mode on the server side so we can get out of automatic mode
 global mode
 mode = 'manual'
 
-def lights(light):
-    light = str(light)
+def lights(light: str):
+    """Change the light to the color indicated"""
     if light == 'green':
         GPIO.output(GREEN, True)
         GPIO.output(YELLOW, False)
@@ -46,14 +46,25 @@ def lights(light):
         GPIO.output(RED, False)
 
 # a function for automatic mode
-def auto():
+def auto(time_red: int = 15, time_yellow: int = 3, time_green: int = 15):
+    """Automatically cycle between red, green, then yellow"""
+    # this seems redundant, but we need to be able to stop the loop at any point.
+    # if this is not completed, the loop will finish executing, leaving the light yellow
+    # even if the light was manually set to another color while the loop was executing
+    # before that line
     while mode == 'auto':
-        lights('red')
-        sleep(15)
-        lights('green')
-        sleep(15)
-        lights('yellow')
-        sleep(3)
+        if mode == 'auto':
+            lights('red')
+        if mode == 'auto':
+            sleep(time_red)
+        if mode == 'auto':
+            lights('green')
+        if mode == 'auto':
+            sleep(time_green)
+        if mode == 'auto':
+            lights('yellow')
+        if mode == 'auto':
+            sleep(time_yellow)
 
 # add route to serve webpage and javascript
 @app.route('/<path:path>', methods=['GET'])
@@ -79,9 +90,9 @@ def control():
             lights(request.json.get('color'))
     return request.json.get('mode')
 
-@app.route('/js/<path:path>')
-def send_js(path):
-    return send_from_directory('js', path)
+# @app.route('/js/<path:path>')
+# def send_js(path):
+#     return send_from_directory('js', path)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

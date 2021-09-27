@@ -1,6 +1,6 @@
-var url = "control/"
-var mode = "manual"
-sendRequestMode(mode)
+var url = "control/";
+var mode = "manual";
+sendRequestMode(mode);
 
 function sendRequest(color){
     let xhr = new XMLHttpRequest();
@@ -18,37 +18,37 @@ function sendRequestMode(){
 
 document.getElementById("red").addEventListener("click", function () {
     if (mode == "manual"){
-        sendRequest("red")
+        sendRequest("red");
     }
     else{
-        alert("cannot set color manually while not in manual mode.")
+        alert("cannot set color manually while not in manual mode.");
     }
 });
 
 document.getElementById("yellow").addEventListener("click", function () {
     if (mode == "manual"){
-        sendRequest("yellow")
+        sendRequest("yellow");
     }
     else{
-        alert("cannot set color manually while not in manual mode.")
+        alert("cannot set color manually while not in manual mode.");
     }
 });
 
 document.getElementById("green").addEventListener("click", function () {
     if (mode == "manual"){
-        sendRequest("green")
+        sendRequest("green");
     }
     else{
-        alert("cannot set color manually while not in manual mode.")
+        alert("cannot set color manually while not in manual mode.");
     }
 });
 
 document.getElementById("auto").addEventListener("click", function () {
-    mode = "auto"
-    sendRequestMode()
+    mode = "auto";
+    sendRequestMode();
 });
 
 document.getElementById("manual").addEventListener("click", function () {
-    mode = "manual"
-    sendRequestMode()
+    mode = "manual";
+    sendRequestMode();
 });
